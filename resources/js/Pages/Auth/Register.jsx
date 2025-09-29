@@ -34,7 +34,7 @@ export default function Register() {
                 </div>
                 <div className="py-24 flex laptopLg:ml-[680px] laptopXl:ml-[870px]">
                     <div>
-                        <img src="/images/moonton-white.svg" alt="" />
+                        <img src="/images/journey-white.svg" alt="" />
                         <div className="my-[70px]">
                             <div className="font-semibold text-[26px] mb-3">
                                 Sign Up
