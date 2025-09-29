@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const TextInput = forwardRef(function TextInput(
-    { type = 'text', name, value, defaultValue, className, variant = 'primary', autoComplete, required, isFocused, handleChange, placeholder, isError, ...props },
+    { type = 'text', name, value, defaultValue, className, variant = 'primary', autoComplete, required, isFocused, onChange, placeholder, isError, ...props },
     ref,
 ) {
     const localRef = useRef(null);
@@ -31,7 +31,7 @@ const TextInput = forwardRef(function TextInput(
                 ref={localRef}
                 autoComplete={autoComplete}
                 required={required}
-                onChange={(e) => handleChange?.(e)}
+                onChange={(e) => onChange?.(e)}
                 placeholder={placeholder}
             />
         </div>
@@ -48,7 +48,7 @@ TextInput.propTypes = {
     autoComplete: PropTypes.string,
     required: PropTypes.bool,
     isFocused: PropTypes.bool,
-    handleChange: PropTypes.func,
+    onChange: PropTypes.func,
     placeholder: PropTypes.string,
     isError: PropTypes.bool,
 };
