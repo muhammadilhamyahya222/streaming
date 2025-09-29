@@ -3,12 +3,13 @@ import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
 export default function Authenticated({ children }) {
-    const user = usePage().props.auth.user;
+    const { auth } = usePage().props;
+    const user = auth.user;
     return (
         <>
             <div className="mx-auto max-w-screen hidden lg:block">
                 {/* START: Sidebar */}
-                <Sidebar />
+                <Sidebar auth={auth} />
                 {/* END: Sidebar */}
 
                 {/* START: Content */}
