@@ -1,11 +1,13 @@
 import FlashMessage from "@/Components/FlashMessage";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Authenticated from "@/Layouts/Authenticated/Index";
-import { Link } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Index({ auth, flashMessage, movies }) {
+    const { delete: destroy, put } = useForm();
     return (
         <Authenticated auth={auth}>
+            <Head title="List Movies" />
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-semibold text-gray-800">
                     Movie List
@@ -74,13 +76,33 @@ export default function Index({ auth, flashMessage, movies }) {
                                         </Link>
                                     </td>
                                     <td className="px-4 py-3 text-center">
-                                        <PrimaryButton
-                                            type="button"
-                                            variant="danger"
-                                            className="px-4 py-2 rounded-lg text-sm bg-red-500 text-white hover:bg-red-600 transition"
+                                        <div
+                                            onClick={() => {
+                                                movie.deleted_at
+                                                    ? put(
+                                                          route(
+                                                              "admin.dashboard.movie.restore",
+                                                              movie.id
+                                                          )
+                                                      )
+                                                    : destroy(
+                                                          route(
+                                                              "admin.dashboard.movie.destroy",
+                                                              movie.id
+                                                          )
+                                                      );
+                                            }}
                                         >
-                                            Delete
-                                        </PrimaryButton>
+                                            <PrimaryButton
+                                                type="button"
+                                                variant="danger"
+                                                className="px-4 py-2 rounded-lg text-sm bg-red-500 text-white hover:bg-red-600 transition"
+                                            >
+                                                {movie.deleted_at
+                                                    ? "Restore"
+                                                    : "Delete"}
+                                            </PrimaryButton>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
